@@ -4,6 +4,8 @@ SRC_DIR="src"
 OUT_DIR="bin"
 MAIN_CLASS="com.rmsca.Main"
 
+mkdir -p $OUT_DIR
+
 echo "Cleaining old class files..."
 rm -rf $OUT_DIR/*
 
