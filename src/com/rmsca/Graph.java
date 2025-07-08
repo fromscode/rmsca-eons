@@ -1,7 +1,9 @@
 package com.rmsca;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.PriorityQueue;
 
 public class Graph {
     private Map<String, Map<String, Edge>> graph;
@@ -55,4 +57,54 @@ public class Graph {
         }
         return output;
     }
+
+    public HashMap<String, String> shortestPath(String source, String dest) {
+        //Using Dijkstra's to find the shortest distance between source and destination nodes
+        HashMap<String, Integer> distance = new HashMap<>();
+        HashMap<String, String> prev = new HashMap<>();
+        PriorityQueue<String> pq = new PriorityQueue<>(
+            (s1, s2) -> Integer.compare(distance.get(s1), distance.get(s2))
+        );
+        HashSet<String> visited = new HashSet<>();
+
+        for (String sourceNode : graph.keySet()) {
+            distance.put(sourceNode, Integer.MAX_VALUE);
+            prev.put(sourceNode, "-");
+        }
+        distance.put(source, 0);
+        pq.offer(source);
+
+        while (!pq.isEmpty()) {
+            String current = pq.poll();
+
+            if (current.equals(dest))   break;
+            // Loop terminated because here we find the distance to the target node and not distances to all the nodes
+
+            if (visited.contains(current))  continue;
+
+            Map<String, Edge> neighbors = graph.get(current);
+            
+            // Performing edge relaxations for all edges from current vertex
+            for (String neighbor : neighbors.keySet()) {
+                if (visited.contains(neighbor)) continue;
+                int temp = distance.get(current) + neighbors.get(neighbor).getWeight();
+
+                if (temp < distance.get(neighbor)) {
+                    distance.put(neighbor, temp);
+                    prev.put(neighbor, current);
+                    pq.offer(neighbor);
+                }
+            }
+
+            visited.add(current);
+        }
+
+        HashMap<String, String> res = new HashMap<>(prev);
+        res.put("distance", String.valueOf(distance.get(dest)));
+        return res;
+
+        // Very unclean method to return the values I know, but for now it will do
+    }
+
+
 }
