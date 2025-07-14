@@ -6,10 +6,14 @@ import java.util.HashMap;
 // The sole purpose of this class is so that it can be used to return the distance and prev vector
 // from the shortest path algorithm in Graph class
 public class DijkstraResult {
+    private final String source;
+    private final String dest;
     private final int distance;
     private final HashMap<String, String> previous;
 
-    public DijkstraResult(int distance, HashMap<String, String> previous) {
+    public DijkstraResult(String source, String dest, int distance, HashMap<String, String> previous) {
+        this.source = source;
+        this.dest = dest;
         this.distance = distance;
         this.previous = previous;
     }
@@ -22,7 +26,7 @@ public class DijkstraResult {
         return this.distance;
     }
 
-    public ArrayDeque<String> getFullPath(String source, String dest) {
+    public ArrayDeque<String> getFullPath() {
         ArrayDeque<String> stack = new ArrayDeque<>();
         stack.push(dest);
         String curr = previous.get(dest);
@@ -36,11 +40,9 @@ public class DijkstraResult {
 
     @Override
     public String toString() {
-        String res = "distance: " + this.distance + "\n\n";
+        String res = "Distance: " + this.distance + "\n";
 
-        for (HashMap.Entry<String, String> itr : previous.entrySet()) {
-            res += itr.getKey() + ": " + itr.getValue() + "\n";
-        }
+        res += "Path from " + this.source + " to " + this.dest + ": " + getFullPath();
         return res;
     }
 

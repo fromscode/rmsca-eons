@@ -30,11 +30,11 @@ public class Main {
         String dest = sc.nextLine();
 
         DijkstraResult res = graph.shortestPath(source, dest);
-        System.out.println(res);
 
         System.out.println();
-        System.out.print("Path from " + source + " to " + dest + ": ");
-        System.out.println(res.getFullPath(source, dest));
+        System.out.println(res);
+        // System.out.print("Path from " + source + " to " + dest + ": ");
+        // System.out.println(res.getFullPath(source, dest));
 
         sc.close();
     }

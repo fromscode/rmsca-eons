@@ -99,7 +99,7 @@ public class Graph {
             visited.add(current);
         }
 
-        DijkstraResult res = new DijkstraResult(distance.get(dest), prev);
+        DijkstraResult res = new DijkstraResult(source, dest, distance.get(dest), prev);
 
         return res;
     }
