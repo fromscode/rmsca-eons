@@ -67,9 +67,9 @@ public class Graph {
         );
         HashSet<String> visited = new HashSet<>();
 
-        for (String sourceNode : graph.keySet()) {
-            distance.put(sourceNode, Integer.MAX_VALUE);
-            prev.put(sourceNode, "-");
+        for (String node : graph.keySet()) {
+            distance.put(node, Integer.MAX_VALUE);
+            prev.put(node, "-");
         }
         distance.put(source, 0);
         pq.offer(source);
