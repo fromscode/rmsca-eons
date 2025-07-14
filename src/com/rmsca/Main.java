@@ -1,8 +1,5 @@
 package com.rmsca;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class Main {
     public static void main(String[] args) {
         Graph graph = new Graph();
@@ -22,9 +19,7 @@ public class Main {
         System.out.println(graph);
         System.out.println();
 
-        HashMap<String, String> res = graph.shortestPath("D", "F");
-        for (Map.Entry<String, String> entry : res.entrySet()) {
-            System.out.println(entry.getKey() + ": " + entry.getValue());
-        }
+        DijkstraResult res = graph.shortestPath("D", "F");
+        System.out.println(res);
     }
 }

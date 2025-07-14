@@ -58,7 +58,7 @@ public class Graph {
         return output;
     }
 
-    public HashMap<String, String> shortestPath(String source, String dest) {
+    public DijkstraResult shortestPath(String source, String dest) {
         //Using Dijkstra's to find the shortest distance between source and destination nodes
         HashMap<String, Integer> distance = new HashMap<>();
         HashMap<String, String> prev = new HashMap<>();
@@ -99,11 +99,9 @@ public class Graph {
             visited.add(current);
         }
 
-        HashMap<String, String> res = new HashMap<>(prev);
-        res.put("distance", String.valueOf(distance.get(dest)));
-        return res;
+        DijkstraResult res = new DijkstraResult(distance.get(dest), prev);
 
-        // Very unclean method to return the values I know, but for now it will do
+        return res;
     }
 
 
