@@ -6,7 +6,7 @@ MAIN_CLASS="com.rmsca.Main"
 
 mkdir -p $OUT_DIR
 
-echo "Cleaining old class files..."
+echo "Cleaning old class files..."
 rm -rf $OUT_DIR/*
 
 echo "Compiling files..."
