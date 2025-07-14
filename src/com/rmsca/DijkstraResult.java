@@ -1,5 +1,6 @@
 package com.rmsca;
 
+import java.util.ArrayDeque;
 import java.util.HashMap;
 
 // The sole purpose of this class is so that it can be used to return the distance and prev vector
@@ -19,6 +20,18 @@ public class DijkstraResult {
 
     public int getDistance() {
         return this.distance;
+    }
+
+    public ArrayDeque<String> getFullPath(String source, String dest) {
+        ArrayDeque<String> stack = new ArrayDeque<>();
+        stack.push(dest);
+        String curr = previous.get(dest);
+        while (curr != "-") {
+            stack.push(curr);
+            curr = previous.get(curr);
+        }
+
+        return stack;
     }
 
     @Override

@@ -19,7 +19,13 @@ public class Main {
         System.out.println(graph);
         System.out.println();
 
-        DijkstraResult res = graph.shortestPath("D", "F");
+        String source = "D";
+        String dest = "F";
+        DijkstraResult res = graph.shortestPath(source, dest);
         System.out.println(res);
+
+        System.out.println();
+        System.out.print("Path from " + source + " to " + dest + ": ");
+        System.out.println(res.getFullPath(source, dest));
     }
 }
