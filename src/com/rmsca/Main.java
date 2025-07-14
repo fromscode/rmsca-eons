@@ -1,5 +1,7 @@
 package com.rmsca;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
         Graph graph = new Graph();
@@ -19,13 +21,21 @@ public class Main {
         System.out.println(graph);
         System.out.println();
 
-        String source = "D";
-        String dest = "F";
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter source node: ");
+        String source = sc.nextLine();
+        
+        System.out.print("Enter destination node: ");
+        String dest = sc.nextLine();
+
         DijkstraResult res = graph.shortestPath(source, dest);
         System.out.println(res);
 
         System.out.println();
         System.out.print("Path from " + source + " to " + dest + ": ");
         System.out.println(res.getFullPath(source, dest));
+
+        sc.close();
     }
 }
