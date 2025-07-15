@@ -14,5 +14,6 @@ javac -d $OUT_DIR $SRC_DIR/com/rmsca/*.java
 
 if [ $? -eq 0 ]; then
 	echo "Compile successful!"
+	echo ""
 	java -cp $OUT_DIR $MAIN_CLASS
 fi
