@@ -29,8 +29,13 @@ public class Main {
         System.out.print("Enter destination node: ");
         String dest = sc.nextLine();
 
+        System.out.print("Enter strength of request: ");
+        int strength = Integer.valueOf(sc.nextLine());
+
         Engine engine = new Engine(graph);
+        System.out.println();
         System.out.println(engine.getShortestPath(source, dest));
+        System.out.println(engine.getSlotsRequired(source, dest, strength));
         
         sc.close();
     }
