@@ -29,13 +29,9 @@ public class Main {
         System.out.print("Enter destination node: ");
         String dest = sc.nextLine();
 
-        DijkstraResult res = graph.shortestPath(source, dest);
-
-        System.out.println();
-        System.out.println(res);
-        // System.out.print("Path from " + source + " to " + dest + ": ");
-        // System.out.println(res.getFullPath(source, dest));
-
+        Engine engine = new Engine(graph);
+        System.out.println(engine.getShortestPath(source, dest));
+        
         sc.close();
     }
 }
