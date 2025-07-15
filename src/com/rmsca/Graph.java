@@ -1,5 +1,6 @@
 package com.rmsca;
 
+import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -104,5 +105,8 @@ public class Graph {
         return res;
     }
 
-
+    public boolean assignSlots(ArrayDeque<String> fullPath, int numSlots) {
+        // TO-DO: code the logic to assign slots
+        return false;
+    }
 }
