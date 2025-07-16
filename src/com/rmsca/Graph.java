@@ -1,6 +1,7 @@
 package com.rmsca;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -113,7 +114,47 @@ public class Graph {
     }
 
     public boolean assignSlots(ArrayDeque<String> fullPath, int numSlots) {
-        // int numEdges = fullPath.size()-1;
+        ArrayList<String> fullPathList = new ArrayList<>(fullPath);
+        int pathSize = fullPathList.size();
+        int numEdges = pathSize-1;
+        int count = 0;  // this variable is used to count how many edges have slots assigned to them
+        int startIndex = 0; // index where first slot is assigned
+
+        for (int i=0; i<numEdges; i=(i+1)%(numEdges)) {
+            String currNode = fullPathList.get(i);
+            String nextNode = fullPathList.get(i+1);
+            Edge currEdge = getEdge(currNode, nextNode);
+
+            System.out.println(currNode + " " + nextNode);
+
+            if (canAssignSlots(currEdge, startIndex, numSlots)) ++count;
+            else {
+                count = 0;
+                startIndex = findStartIndex(currEdge, startIndex, numSlots);
+                if (startIndex == -1)   return false;
+            }
+
+            if (count == numEdges) {
+                finalizeSlots(fullPathList, startIndex, numSlots);
+                return true;
+            }
+        }
         return false;
     }
+
+    public boolean canAssignSlots(Edge currEdge, int startIndex, int numSlots) {
+        // to-do : code logic
+        return true;
+    }
+
+    public boolean finalizeSlots(ArrayList<String> fullPathList, int startIndex, int numSlots) {
+        // to-do : code logic
+        return true;
+    }
+
+    public int findStartIndex(Edge currEdge, int startIndex, int numSlots) {
+        // to-do: code logic
+        return -1;
+    }
+    
 }

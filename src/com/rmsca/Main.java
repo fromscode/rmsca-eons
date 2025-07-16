@@ -37,8 +37,7 @@ public class Main {
         System.out.println(engine.getShortestPath(source, dest));
         System.out.println(engine.getSlotsRequired(source, dest, strength));
 
-        boolean[] spectrum = graph.getEdge("A", "C").getSpectrum();
-        for (boolean i : spectrum)  System.out.print(i + " ");
+        engine.processRequest(source, dest, strength);
         
         sc.close();
     }
