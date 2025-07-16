@@ -143,7 +143,10 @@ public class Graph {
     }
 
     public boolean canAssignSlots(Edge currEdge, int startIndex, int numSlots) {
-        // to-do : code logic
+        boolean[] spectrum = currEdge.getSpectrum();
+        for (int i=startIndex; i<numSlots; ++i) {
+            if (spectrum[i] == true)    return false;
+        }
         return true;
     }
 
