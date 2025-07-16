@@ -125,8 +125,6 @@ public class Graph {
             String nextNode = fullPathList.get(i+1);
             Edge currEdge = getEdge(currNode, nextNode);
 
-            System.out.println(currNode + " " + nextNode);
-
             if (canAssignSlots(currEdge, startIndex, numSlots)) ++count;
             else {
                 count = 0;
@@ -142,7 +140,7 @@ public class Graph {
         return false;
     }
 
-    public boolean canAssignSlots(Edge currEdge, int startIndex, int numSlots) {
+    private boolean canAssignSlots(Edge currEdge, int startIndex, int numSlots) {
         boolean[] spectrum = currEdge.getSpectrum();
         int endPoint = startIndex + numSlots;
         if (endPoint >= spectrum.length)    return false;
@@ -152,7 +150,7 @@ public class Graph {
         return true;
     }
 
-    public void finalizeSlots(ArrayList<String> fullPathList, int startIndex, int numSlots) {
+    private void finalizeSlots(ArrayList<String> fullPathList, int startIndex, int numSlots) {
         int numEdges = fullPathList.size()-1;
         for (int i=0; i<numEdges; ++i) {
             String currNode = fullPathList.get(i);
@@ -163,12 +161,12 @@ public class Graph {
             int endPoint = startIndex + numSlots;
 
             for (int j=startIndex; j<endPoint; ++j) spectrum[j] = true;
-            System.out.println("Edge (" + currNode + " --> " + nextNode + "): assigned slots: " + 
-                                "from " + startIndex + " to " + (endPoint - 1));
+            System.out.println("Edge (" + currEdge.getFrom() + " --> " + currEdge.getTo() + 
+                                "): assigned slots: from " + startIndex + " to " + (endPoint - 1));
         }
     }
 
-    public int findStartIndex(Edge currEdge, int startIndex, int numSlots) {
+    private int findStartIndex(Edge currEdge, int startIndex, int numSlots) {
         boolean[] spectrum = currEdge.getSpectrum();
         int i = startIndex;
         while (i < spectrum.length && spectrum[i] == false) ++i;    // find first assigned slot

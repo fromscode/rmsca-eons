@@ -46,6 +46,10 @@ public class Main {
         engine.processRequest("D", "C", 100);
         System.out.println();
         engine.processRequest("A", "C", 100);
+        System.out.println();
+        engine.processRequest("C", "A", 100);
+        System.out.println();
+        engine.processRequest("G", "A", 100);
         
         sc.close();
     }
