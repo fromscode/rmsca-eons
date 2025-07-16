@@ -156,8 +156,14 @@ public class Graph {
     }
 
     public int findStartIndex(Edge currEdge, int startIndex, int numSlots) {
-        // to-do: code logic
-        return -1;
+        boolean[] spectrum = currEdge.getSpectrum();
+        int i = startIndex;
+        while (i < spectrum.length && spectrum[i] == false) ++i;    // find first assigned slot
+        while (i < spectrum.length && spectrum[i] == true) ++i;    // find last contigous assigned slot
+
+        if (spectrum.length - i < numSlots) return -1;
+
+        return i;
     }
     
 }
