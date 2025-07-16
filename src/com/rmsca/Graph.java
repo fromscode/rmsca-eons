@@ -150,9 +150,20 @@ public class Graph {
         return true;
     }
 
-    public boolean finalizeSlots(ArrayList<String> fullPathList, int startIndex, int numSlots) {
-        // to-do : code logic
-        return true;
+    public void finalizeSlots(ArrayList<String> fullPathList, int startIndex, int numSlots) {
+        int numEdges = fullPathList.size()-1;
+        for (int i=0; i<numEdges; ++i) {
+            String currNode = fullPathList.get(i);
+            String nextNode = fullPathList.get(i+1);
+            Edge currEdge = getEdge(currNode, nextNode);
+
+            boolean[] spectrum = currEdge.getSpectrum();
+            int endPoint = startIndex + numSlots;
+
+            for (int j=startIndex; j<endPoint; ++j) spectrum[j] = true;
+            System.out.println("Edge (" + currNode + " --> " + nextNode + "): assigned slots: " + 
+                                "from " + startIndex + " to " + (endPoint - 1));
+        }
     }
 
     public int findStartIndex(Edge currEdge, int startIndex, int numSlots) {
