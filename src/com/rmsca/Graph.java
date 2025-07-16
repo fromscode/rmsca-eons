@@ -21,6 +21,13 @@ public class Graph {
         return this.graph;
     }
 
+    public Edge getEdge(String source, String dest) {
+        if (this.graph.containsKey(source) && this.graph.get(source).containsKey(dest)) 
+            return this.graph.get(source).get(dest);
+        
+        return null;
+    }
+
     public void addEdge(String source, String destination, int weight) {
         Edge edge = new Edge(source, destination, weight);
 
@@ -106,7 +113,7 @@ public class Graph {
     }
 
     public boolean assignSlots(ArrayDeque<String> fullPath, int numSlots) {
-        // TO-DO: code the logic to assign slots
+        // int numEdges = fullPath.size()-1;
         return false;
     }
 }
