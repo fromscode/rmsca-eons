@@ -144,7 +144,9 @@ public class Graph {
 
     public boolean canAssignSlots(Edge currEdge, int startIndex, int numSlots) {
         boolean[] spectrum = currEdge.getSpectrum();
-        for (int i=startIndex; i<numSlots; ++i) {
+        int endPoint = startIndex + numSlots;
+        if (endPoint >= spectrum.length)    return false;
+        for (int i=startIndex; i<endPoint; ++i) {
             if (spectrum[i] == true)    return false;
         }
         return true;
