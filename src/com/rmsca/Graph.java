@@ -6,20 +6,13 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.Scanner;
 
 public class Graph {
     private Map<String, Map<String, Edge>> graph;
 
     public Graph() {
         this.graph = new HashMap<>();
-    }
-
-    public void setGraph(Map<String, Map<String, Edge>> graph) {
-        this.graph = graph;
-    }
-
-    public Map<String, Map<String, Edge>> getGraph() {
-        return this.graph;
     }
 
     public Edge getEdge(String source, String dest) {
@@ -29,7 +22,29 @@ public class Graph {
         return null;
     }
 
-    public void addEdge(String source, String destination, int weight) {
+    public void create() {
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            System.out.print("Enter source node: ");
+            String source = sc.nextLine();
+            System.out.print("Enter destination node: ");
+            String dest = sc.nextLine();
+            System.out.print("Enter weight: ");
+            int weight = Integer.valueOf(sc.nextLine());
+
+            addEdge(source, dest, weight);
+            System.out.println("Edge (" +source+ " " +dest+") added");
+
+            System.out.print("Enter (Y/y) to continue: ");
+            String ans = sc.nextLine();
+            System.out.println();
+
+            if (!ans.equals("y") && !ans.equals("Y"))    break;
+        }
+        sc.close();
+    }
+
+    private void addEdge(String source, String destination, int weight) {
         Edge edge = new Edge(source, destination, weight);
 
         if (!graph.containsKey(source)) {
