@@ -49,10 +49,12 @@ public class Edge {
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
-        output.append("(");
-        output.append(getFrom()).append(", ");
-        output.append(getTo()).append(", ");
-        output.append(getWeight()).append(")");
+        output.append("(")
+                .append(getFrom())
+                .append(", ")
+                .append(getTo())
+                .append(", ")
+                .append(getWeight()).append(")");
         
         return output.toString();
     }

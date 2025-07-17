@@ -75,8 +75,10 @@ public class Graph {
             HashMap<String, Edge> map = entry.getValue();
             for (HashMap.Entry<String, Edge> edgeEntry : map.entrySet()) {
                 output.append("(")
-                        .append(edgeEntry.getKey()).append(", ")
-                        .append(edgeEntry.getValue()).append("), ");
+                        .append(edgeEntry.getKey())
+                        .append(", ")
+                        .append(edgeEntry.getValue())
+                        .append("), ");
             
             }
             output.append("\n");
