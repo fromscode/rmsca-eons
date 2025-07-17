@@ -68,18 +68,19 @@ public class Graph {
 
     @Override
     public String toString() {
-        String output = "";
+        StringBuilder output = new StringBuilder();
         for (String source : graph.keySet()) {
-            output += source + ": ";
+            output.append(source).append(": ");
+
             Map<String, Edge> map = graph.get(source);
             for (String dest : map.keySet()) {
-                output += "(" + dest+ ",(" + map.get(dest).getFrom() + ", " + map.get(dest).getTo() + ","
-                + map.get(dest).getWeight() + ")),  ";
+                output.append("(").append(dest).append(", ");
+                output.append(getEdge(source, dest)).append("), ");
             
             }
-            output += "\n";
+            output.append("\n");
         }
-        return output;
+        return output.toString();
     }
 
     public DijkstraResult shortestPath(String source, String dest) {
