@@ -33,7 +33,7 @@ public class Graph {
             int weight = Integer.valueOf(sc.nextLine());
 
             addEdge(source, dest, weight);
-            System.out.println("Edge (" +source+ " " +dest+") added");
+            System.out.println("Edge " +getEdge(source, dest)+ " added!");
 
             System.out.print("Enter (Y/y) to continue: ");
             String ans = sc.nextLine();

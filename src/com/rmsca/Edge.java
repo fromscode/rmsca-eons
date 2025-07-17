@@ -44,5 +44,16 @@ public class Edge {
 
     public void setSpectrum(boolean[] spectrum) {
         this.spectrum = spectrum;
-    }    
+    }
+    
+    @Override
+    public String toString() {
+        StringBuilder output = new StringBuilder();
+        output.append("(");
+        output.append(getFrom()).append(", ");
+        output.append(getTo()).append(", ");
+        output.append(getWeight()).append(")");
+        
+        return output.toString();
+    }
 }
