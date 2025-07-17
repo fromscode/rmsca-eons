@@ -9,7 +9,7 @@ import java.util.PriorityQueue;
 import java.util.Scanner;
 
 public class Graph {
-    private Map<String, Map<String, Edge>> graph;
+    private HashMap<String, HashMap<String, Edge>> graph;
 
     public Graph() {
         this.graph = new HashMap<>();
@@ -48,7 +48,7 @@ public class Graph {
         Edge edge = new Edge(source, destination, weight);
 
         if (!graph.containsKey(source)) {
-            Map<String, Edge> map = new HashMap<>();
+            HashMap<String, Edge> map = new HashMap<>();
             map.put(destination, edge);
             graph.put(source, map);
         }
@@ -57,7 +57,7 @@ public class Graph {
         }
 
         if (!graph.containsKey(destination)) {
-            Map<String, Edge> map = new HashMap<>();
+            HashMap<String, Edge> map = new HashMap<>();
             map.put(source, edge);
             graph.put(destination, map);
         }
@@ -69,13 +69,14 @@ public class Graph {
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
-        for (String source : graph.keySet()) {
-            output.append(source).append(": ");
+        for (HashMap.Entry<String, HashMap<String, Edge>> entry : graph.entrySet()) {
+            output.append(entry.getKey()).append(": ");
 
-            Map<String, Edge> map = graph.get(source);
-            for (String dest : map.keySet()) {
-                output.append("(").append(dest).append(", ");
-                output.append(getEdge(source, dest)).append("), ");
+            HashMap<String, Edge> map = entry.getValue();
+            for (HashMap.Entry<String, Edge> edgeEntry : map.entrySet()) {
+                output.append("(")
+                        .append(edgeEntry.getKey()).append(", ")
+                        .append(edgeEntry.getValue()).append("), ");
             
             }
             output.append("\n");
