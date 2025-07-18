@@ -11,10 +11,12 @@ public class Main {
         graph.create(sc);
         System.out.println(graph);
         System.out.println();
+        System.out.println("------------------------------"
+        + "---------------------------------------");
 
         Engine engine = new Engine(graph);
 
-        engine.build();
+        engine.build(sc);
         sc.close();
     }
 }

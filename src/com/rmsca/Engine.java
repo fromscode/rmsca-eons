@@ -1,5 +1,7 @@
 package com.rmsca;
 
+import java.util.Scanner;
+
 public class Engine {
     private Graph graph;
 
@@ -55,5 +57,18 @@ public class Engine {
         int numSlots = getSlotsRequired(source, dest, strength, shortestPath);
         
         return this.graph.assignSlots(shortestPath.getFullPath(), numSlots); 
+    }
+
+    public void build(Scanner sc) {
+        System.out.println("Leave input empty to quit");
+        while (true) {
+            System.out.print("Enter request (source destination strength): ");
+            String input = sc.nextLine();
+            if (input.equals("")) break;
+            String[] arr = input.split(" ");
+
+            processRequest(arr[0], arr[1], Integer.valueOf(arr[2]));
+            System.out.println();
+        }
     }
 }
