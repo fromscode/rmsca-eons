@@ -18,10 +18,6 @@ public class DijkstraResult {
         this.previous = previous;
     }
 
-    public HashMap<String, String> getPrevious() {
-        return this.previous;
-    }
-
     public int getDistance() {
         return this.distance;
     }

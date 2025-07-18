@@ -18,34 +18,18 @@ public class Edge {
         return from;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
-    }
-
     public String getTo() {
         return to;
-    }
-
-    public void setTo(String to) {
-        this.to = to;
     }
 
     public int getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
-
     public boolean[] getSpectrum() {
         return spectrum;
     }
 
-    public void setSpectrum(boolean[] spectrum) {
-        this.spectrum = spectrum;
-    }
-    
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
