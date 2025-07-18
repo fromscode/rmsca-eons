@@ -31,13 +31,13 @@ public class Graph {
             if (input.isEmpty()) break;
             String[] arr = input.split(" ");
 
-            addEdge(arr[0], arr[1], Integer.valueOf(arr[2]));
-            System.out.println("Edge " +getEdge(arr[0], arr[1])+ " added!");
+            Edge edge = addEdge(arr[0], arr[1], Integer.valueOf(arr[2]));
+            System.out.println("Edge " +edge+ " added!");
             System.out.println();
         }
     }
 
-    private void addEdge(String source, String destination, int weight) {
+    private Edge addEdge(String source, String destination, int weight) {
         Edge edge = new Edge(source, destination, weight);
 
         if (!graph.containsKey(source)) {
@@ -57,6 +57,8 @@ public class Graph {
         else {
             graph.get(destination).put(source, edge);
         }
+
+        return edge;
     }
 
     @Override
