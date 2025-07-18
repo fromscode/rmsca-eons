@@ -23,22 +23,17 @@ public class Graph {
     }
 
     public void create(Scanner sc) {
+        System.out.println("Leave input empty to finish");
+        System.out.println();
         while (true) {
-            System.out.print("Enter source node: ");
-            String source = sc.nextLine();
-            System.out.print("Enter destination node: ");
-            String dest = sc.nextLine();
-            System.out.print("Enter weight: ");
-            int weight = Integer.valueOf(sc.nextLine());
+            System.out.print("Enter edge (source destination weight): ");
+            String input = sc.nextLine();
+            if (input.isEmpty()) break;
+            String[] arr = input.split(" ");
 
-            addEdge(source, dest, weight);
-            System.out.println("Edge " +getEdge(source, dest)+ " added!");
-
-            System.out.print("Enter (Y/y) to continue: ");
-            String ans = sc.nextLine();
+            addEdge(arr[0], arr[1], Integer.valueOf(arr[2]));
+            System.out.println("Edge " +getEdge(arr[0], arr[1])+ " added!");
             System.out.println();
-
-            if (!ans.equals("y") && !ans.equals("Y"))    break;
         }
     }
 
