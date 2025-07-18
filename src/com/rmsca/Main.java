@@ -1,27 +1,20 @@
 package com.rmsca;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
         
         Graph graph = new Graph();
-        graph.create();
+        graph.create(sc);
         System.out.println(graph);
         System.out.println();
 
         Engine engine = new Engine(graph);
 
-        engine.processRequest("A", "G", Integer.MAX_VALUE);
-        System.out.println();
-        engine.processRequest("D", "F", 100);
-        System.out.println();
-        engine.processRequest("A", "B", 100);
-        System.out.println();
-        engine.processRequest("D", "C", 100);
-        System.out.println();
-        engine.processRequest("A", "C", 100);
-        System.out.println();
-        engine.processRequest("C", "A", 100);
-        System.out.println();
-        engine.processRequest("G", "A", 100);
+        engine.build();
+        sc.close();
     }
 }

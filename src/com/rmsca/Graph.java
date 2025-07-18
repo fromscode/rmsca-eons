@@ -22,8 +22,7 @@ public class Graph {
         return null;
     }
 
-    public void create() {
-        Scanner sc = new Scanner(System.in);
+    public void create(Scanner sc) {
         while (true) {
             System.out.print("Enter source node: ");
             String source = sc.nextLine();
@@ -41,7 +40,6 @@ public class Graph {
 
             if (!ans.equals("y") && !ans.equals("Y"))    break;
         }
-        sc.close();
     }
 
     private void addEdge(String source, String destination, int weight) {
