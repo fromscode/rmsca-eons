@@ -1,6 +1,5 @@
 package com.rmsca;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -127,16 +126,15 @@ public class Graph {
         return res;
     }
 
-    public boolean assignSlots(ArrayDeque<String> fullPath, int numSlots) {
-        ArrayList<String> fullPathList = new ArrayList<>(fullPath);
-        int pathSize = fullPathList.size();
+    public boolean assignSlots(ArrayList<String> fullPath, int numSlots) {
+        int pathSize = fullPath.size();
         int numEdges = pathSize-1;
         int count = 0;  // this variable is used to count how many edges have slots assigned to them
         int startIndex = 0; // index where first slot is assigned
 
         for (int i=0; i<numEdges; i=(i+1)%(numEdges)) {
-            String currNode = fullPathList.get(i);
-            String nextNode = fullPathList.get(i+1);
+            String currNode = fullPath.get(i);
+            String nextNode = fullPath.get(i+1);
             Edge currEdge = getEdge(currNode, nextNode);
 
             if (canAssignSlots(currEdge, startIndex, numSlots)) ++count;
@@ -147,7 +145,7 @@ public class Graph {
             }
 
             if (count == numEdges) {
-                finalizeSlots(fullPathList, startIndex, numSlots);
+                finalizeSlots(fullPath, startIndex, numSlots);
                 return true;
             }
         }
@@ -164,11 +162,11 @@ public class Graph {
         return true;
     }
 
-    private void finalizeSlots(ArrayList<String> fullPathList, int startIndex, int numSlots) {
-        int numEdges = fullPathList.size()-1;
+    private void finalizeSlots(ArrayList<String> fullPath, int startIndex, int numSlots) {
+        int numEdges = fullPath.size()-1;
         for (int i=0; i<numEdges; ++i) {
-            String currNode = fullPathList.get(i);
-            String nextNode = fullPathList.get(i+1);
+            String currNode = fullPath.get(i);
+            String nextNode = fullPath.get(i+1);
             Edge currEdge = getEdge(currNode, nextNode);
 
             boolean[] spectrum = currEdge.getSpectrum();
