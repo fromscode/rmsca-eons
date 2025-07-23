@@ -1,7 +1,7 @@
 package com.rmsca;
 
 public class Node {
-    private final int NUMCORES = 3;
+    private static final int NUMCORES = 3;
     private String name;
 
     public Node(String name) {
