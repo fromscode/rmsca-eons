@@ -1,17 +1,17 @@
 package com.rmsca;
 
 public class Edge {
-    private final static int MAX_SLOTS = 320;
+    private static final int NUM_CHANNELS = Node.getNUM_CORES() *  Node.getNUM_CORES();
     private String from;
     private String to;
     private int weight;
-    private boolean[] spectrum;
+    private Channel[] channels;
 
     public Edge(String from, String to, int weight) {
         this.from = from;
         this.to = to;
         this.weight = weight;
-        this.spectrum = new boolean[MAX_SLOTS];
+        this.channels = new Channel[NUM_CHANNELS];
     }
 
     public String getFrom() {
@@ -26,8 +26,8 @@ public class Edge {
         return weight;
     }
 
-    public boolean[] getSpectrum() {
-        return spectrum;
+    public Channel[] getChannels() {
+        return channels;
     }
 
     @Override

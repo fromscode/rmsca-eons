@@ -4,7 +4,7 @@ public class Channel {
     private final static int MAX_SLOTS = 320;
     private String fromCore;
     private String toCore;
-    private boolean spectrum[];
+    private boolean[] spectrum;
 
     public Channel(String fromCore, String toCore) {
         this.fromCore = fromCore;
