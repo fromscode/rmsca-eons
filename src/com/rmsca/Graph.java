@@ -15,7 +15,7 @@ public class Graph {
         this.graph = new HashMap<>();
     }
 
-    public Edge getEdge(String source, String dest) {
+    public Edge getEdge(Node source, Node dest) {
         if (this.graph.containsKey(source) && this.graph.get(source).containsKey(dest))
             return this.graph.get(source).get(dest);
 
