@@ -2,4 +2,7 @@
 .class  
 
 # ignore build directory
-/bin/   
+bin/   
+
+# ignore Test.java
+**/Test.java
