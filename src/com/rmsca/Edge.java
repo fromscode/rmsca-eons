@@ -1,23 +1,33 @@
 package com.rmsca;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Edge {
     private static final int NUM_CHANNELS = Node.getNUM_CORES() * Node.getNUM_CORES();
     private String from;
     private String to;
     private int weight;
-    private Channel[] channels;
+    private Map<Integer, Map<Integer, Channel>> channels;
 
     public Edge(String from, String to, int weight) {
         this.from = from;
         this.to = to;
         this.weight = weight;
-        this.channels = new Channel[NUM_CHANNELS];
+        this.channels = new HashMap<>();
 
         int fromCore = 1;
         int toCore = 1;
 
         for (int i = 0; i < NUM_CHANNELS; ++i) {
-            this.channels[i] = new Channel(String.valueOf(fromCore), String.valueOf(toCore));
+            Channel channel = new Channel(fromCore, toCore);
+
+            if (!channels.containsKey(fromCore)) {
+                channels.put(fromCore, new HashMap<>());
+            }
+
+            channels.get(fromCore).put(toCore, channel);
+
             ++toCore;
             if (toCore > Node.getNUM_CORES()) {
                 ++fromCore;
@@ -38,7 +48,7 @@ public class Edge {
         return weight;
     }
 
-    public Channel[] getChannels() {
+    public Map<Integer, Map<Integer, Channel>> getChannels() {
         return channels;
     }
 
