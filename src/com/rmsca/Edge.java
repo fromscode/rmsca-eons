@@ -5,14 +5,14 @@ import java.util.Map;
 
 public class Edge {
     private static final int NUM_CHANNELS = Node.getNUM_CORES() * Node.getNUM_CORES();
-    private String from;
-    private String to;
+    private Node from;
+    private Node to;
     private int weight;
     private Map<Integer, Map<Integer, Channel>> channels;
 
     public Edge(String from, String to, int weight) {
-        this.from = from;
-        this.to = to;
+        this.from = new Node(from);
+        this.to = new Node(to);
         this.weight = weight;
         this.channels = new HashMap<>();
 
@@ -36,11 +36,11 @@ public class Edge {
         }
     }
 
-    public String getFrom() {
+    public Node getFrom() {
         return from;
     }
 
-    public String getTo() {
+    public Node getTo() {
         return to;
     }
 
