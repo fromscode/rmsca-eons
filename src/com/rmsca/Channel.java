@@ -2,11 +2,11 @@ package com.rmsca;
 
 public class Channel {
     private final static int MAX_SLOTS = 320;
-    private String fromCore;
-    private String toCore;
+    private int fromCore;
+    private int toCore;
     private boolean[] spectrum;
 
-    public Channel(String fromCore, String toCore) {
+    public Channel(int fromCore, int toCore) {
         this.fromCore = fromCore;
         this.toCore = toCore;
         this.spectrum = new boolean[MAX_SLOTS];
@@ -16,19 +16,19 @@ public class Channel {
         return MAX_SLOTS;
     }
 
-    public String getFromCore() {
+    public int getFromCore() {
         return fromCore;
     }
 
-    public void setFromCore(String fromCore) {
+    public void setFromCore(int fromCore) {
         this.fromCore = fromCore;
     }
 
-    public String getToCore() {
+    public int getToCore() {
         return toCore;
     }
 
-    public void setToCore(String toCore) {
+    public void setToCore(int toCore) {
         this.toCore = toCore;
     }
 
