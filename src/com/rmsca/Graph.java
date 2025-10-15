@@ -234,8 +234,8 @@ public class Graph {
                 spectrum[j] = true;
 
             System.out.println(
-                    "Edge (" + currEdge.getFrom() + currChannel.getFromCore() + " --> " + currEdge.getTo()
-                            + currChannel.getToCore() +
+                    "Edge (" + currNode + currCore + " --> " + nextNode
+                            + nextCore +
                             "): assigned slots: from " + startIndex + " to " + (endPoint - 1));
         }
     }
