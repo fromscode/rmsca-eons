@@ -10,9 +10,9 @@ public class Edge {
     private int weight;
     private Map<Integer, Map<Integer, Channel>> channels;
 
-    public Edge(String from, String to, int weight) {
-        this.from = new Node(from);
-        this.to = new Node(to);
+    public Edge(Node from, Node to, int weight) {
+        this.from = from;
+        this.to = to;
         this.weight = weight;
         this.channels = new HashMap<>();
 
