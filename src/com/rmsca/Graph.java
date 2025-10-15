@@ -10,9 +10,11 @@ import java.util.Scanner;
 
 public class Graph {
     private HashMap<Node, HashMap<Node, Edge>> graph;
+    private HashMap<String, Node> nodes;
 
     public Graph() {
         this.graph = new HashMap<>();
+        this.nodes = new HashMap<>();
     }
 
     public Edge getEdge(Node source, Node dest) {
@@ -32,17 +34,23 @@ public class Graph {
                 break;
             String[] arr = input.split(" ");
 
-            Edge edge = addEdge(arr[0], arr[1], Integer.valueOf(arr[2]));
+            Node source = nodes.getOrDefault(arr[0], new Node(arr[0]));
+            nodes.putIfAbsent(arr[0], source);
+
+            Node destination = nodes.getOrDefault(arr[1], new Node(arr[1]));
+            nodes.putIfAbsent(arr[1], destination);
+
+            Edge edge = addEdge(source, destination, Integer.valueOf(arr[2]));
             System.out.println("Edge " + edge + " added!");
             System.out.println();
         }
     }
 
-    private Edge addEdge(String source, String destination, int weight) {
+    private Edge addEdge(Node source, Node destination, int weight) {
         Edge edge = new Edge(source, destination, weight);
 
         if (!graph.containsKey(source)) {
-            HashMap<String, Edge> map = new HashMap<>();
+            HashMap<Node, Edge> map = new HashMap<>();
             map.put(destination, edge);
             graph.put(source, map);
         } else {
@@ -50,7 +58,7 @@ public class Graph {
         }
 
         if (!graph.containsKey(destination)) {
-            HashMap<String, Edge> map = new HashMap<>();
+            HashMap<Node, Edge> map = new HashMap<>();
             map.put(source, edge);
             graph.put(destination, map);
         } else {
@@ -63,11 +71,11 @@ public class Graph {
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
-        for (HashMap.Entry<String, HashMap<String, Edge>> entry : graph.entrySet()) {
+        for (HashMap.Entry<Node, HashMap<Node, Edge>> entry : graph.entrySet()) {
             output.append(entry.getKey()).append(": ");
 
-            HashMap<String, Edge> map = entry.getValue();
-            for (HashMap.Entry<String, Edge> edgeEntry : map.entrySet()) {
+            HashMap<Node, Edge> map = entry.getValue();
+            for (HashMap.Entry<Node, Edge> edgeEntry : map.entrySet()) {
                 output.append("(")
                         .append(edgeEntry.getKey())
                         .append(", ")
@@ -83,23 +91,25 @@ public class Graph {
     public DijkstraResult shortestPath(String source, String dest) {
         // Using Dijkstra's to find the shortest distance between source and destination
         // nodes
-        HashMap<String, Integer> distance = new HashMap<>();
-        HashMap<String, String> prev = new HashMap<>();
-        PriorityQueue<String> pq = new PriorityQueue<>(
+        Node sourceNode = nodes.get(source);
+        Node destNode = nodes.get(dest);
+        HashMap<Node, Integer> distance = new HashMap<>();
+        HashMap<Node, Node> prev = new HashMap<>();
+        PriorityQueue<Node> pq = new PriorityQueue<>(
                 (s1, s2) -> Integer.compare(distance.get(s1), distance.get(s2)));
-        HashSet<String> visited = new HashSet<>();
+        HashSet<Node> visited = new HashSet<>();
 
-        for (String node : graph.keySet()) {
+        for (Node node : graph.keySet()) {
             distance.put(node, Integer.MAX_VALUE);
-            prev.put(node, "-");
+            prev.put(node, null);
         }
-        distance.put(source, 0);
-        pq.offer(source);
+        distance.put(sourceNode, 0);
+        pq.offer(sourceNode);
 
         while (!pq.isEmpty()) {
-            String current = pq.poll();
+            Node current = pq.poll();
 
-            if (current.equals(dest))
+            if (current.equals(destNode))
                 break;
             // Loop terminated because here we find the distance to the target node and not
             // distances to all the nodes
@@ -107,10 +117,10 @@ public class Graph {
             if (visited.contains(current))
                 continue;
 
-            Map<String, Edge> neighbors = graph.get(current);
+            Map<Node, Edge> neighbors = graph.get(current);
 
             // Performing edge relaxations for all edges from current vertex
-            for (String neighbor : neighbors.keySet()) {
+            for (Node neighbor : neighbors.keySet()) {
                 if (visited.contains(neighbor))
                     continue;
                 int temp = distance.get(current) + neighbors.get(neighbor).getWeight();
@@ -125,12 +135,12 @@ public class Graph {
             visited.add(current);
         }
 
-        DijkstraResult res = new DijkstraResult(source, dest, distance.get(dest), prev);
+        DijkstraResult res = new DijkstraResult(sourceNode, destNode, distance.get(destNode), prev);
 
         return res;
     }
 
-    private boolean canAssignPath(int[] corePath, List<String> nodePath, int numSlots) {
+    private boolean canAssignPath(int[] corePath, List<Node> nodePath, int numSlots) {
         int pathSize = corePath.length;
         int numEdges = pathSize - 1;
         int count = 0; // this variable is used to count how many edges (channels) have slots assigned
@@ -138,8 +148,8 @@ public class Graph {
         int startIndex = 0; // index where first slot is assigned
 
         for (int i = 0; i < numEdges; i = (i + 1) % (numEdges)) {
-            String currNode = nodePath.get(i);
-            String nextNode = nodePath.get(i + 1);
+            Node currNode = nodePath.get(i);
+            Node nextNode = nodePath.get(i + 1);
 
             int currCore = corePath[i];
             int nextCore = corePath[i + 1];
@@ -164,7 +174,7 @@ public class Graph {
         return false;
     }
 
-    private boolean dfs(int[] corePath, List<String> nodePath, int index, int numSlots) {
+    private boolean dfs(int[] corePath, List<Node> nodePath, int index, int numSlots) {
         if (index == corePath.length) {
             if (canAssignPath(corePath, nodePath, numSlots))
                 return true;
@@ -172,7 +182,7 @@ public class Graph {
             return false;
         }
 
-        int core = nodePath.get(index).();
+        int core = nodePath.get(index).getCurrCore();
         for (int i = 0; i < Node.getNUM_CORES(); ++i, core = (core + 1) % Node.getNUM_CORES()) {
             corePath[index] = core;
             if (dfs(corePath, nodePath, index + 1, numSlots))
@@ -182,7 +192,7 @@ public class Graph {
         return false;
     }
 
-    public boolean assignSlots(ArrayList<String> fullPath, int numSlots) {
+    public boolean assignSlots(ArrayList<Node> fullPath, int numSlots) {
         int[] corePath = new int[fullPath.size()];
         return dfs(corePath, fullPath, 0, numSlots);
     }
@@ -199,14 +209,20 @@ public class Graph {
         return true;
     }
 
-    private void finalizeSlots(int[] corePath, List<String> nodePath, int startIndex, int numSlots) {
+    private void finalizeSlots(int[] corePath, List<Node> nodePath, int startIndex, int numSlots) {
         int numEdges = nodePath.size() - 1;
         for (int i = 0; i < numEdges; ++i) {
-            String currNode = nodePath.get(i);
-            String nextNode = nodePath.get(i + 1);
+            Node currNode = nodePath.get(i);
+            Node nextNode = nodePath.get(i + 1);
 
             int currCore = corePath[i];
             int nextCore = corePath[i + 1];
+
+            if (i == 0) {
+                currNode.setCurrCore();
+                nextNode.setCurrCore();
+            } else
+                nextNode.setCurrCore();
 
             Edge currEdge = getEdge(currNode, nextNode);
             Channel currChannel = currEdge.getChannels().get(currCore).get(nextCore);
