@@ -183,7 +183,7 @@ public class Graph {
         }
 
         int core = nodePath.get(index).getCurrCore();
-        for (int i = 0; i < Node.getNUM_CORES(); ++i, core = (core + 1) % Node.getNUM_CORES()) {
+        for (int i = 0; i < Node.getNUM_CORES(); ++i, core = ((core % Node.getNUM_CORES()) + 1)) {
             corePath[index] = core;
             if (dfs(corePath, nodePath, index + 1, numSlots))
                 return true;

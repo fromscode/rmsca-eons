@@ -7,7 +7,7 @@ public class Node {
 
     public Node(String name) {
         this.name = name;
-        this.currCore = 0;
+        this.currCore = 1;
     }
 
     public int getCurrCore() {
@@ -15,7 +15,7 @@ public class Node {
     }
 
     public void setCurrCore() {
-        this.currCore = (this.currCore + 1) % NUM_CORES;
+        this.currCore = ((this.currCore) % NUM_CORES) + 1;
     }
 
     @Override

@@ -27,7 +27,7 @@ public class DijkstraResult {
         ArrayDeque<Node> stack = new ArrayDeque<>();
         stack.push(dest);
         Node curr = previous.get(dest);
-        while (!curr.equals(null)) {
+        while (curr != null) {
             stack.push(curr);
             curr = previous.get(curr);
         }
